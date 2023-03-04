@@ -41,4 +41,4 @@ const OrderSchema = new Schema(
   }
 )
 
-export default mongoose.model('Review', userSchema)
+export default mongoose.model('Order', OrderSchema)
