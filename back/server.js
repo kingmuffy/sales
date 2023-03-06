@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import userRoute from './routes/user.routes.js'
+import mofe from './routes/auth.route.js'
 
 const app = express()
 dotenv.config()
@@ -16,7 +16,7 @@ const connect = async () => {
   }
 }
 
-app.use('/api/user', userRoute)
+app.use('/api/auth', mofe)
 
 app.listen(8800, () => {
   connect()

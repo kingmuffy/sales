@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const { Schema } = mongoose
 
-const UserSchema = new Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -17,11 +17,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    Img: {
-      type: String,
-      required: false,
-    },
-    desc: {
+    img: {
       type: String,
       required: false,
     },
@@ -31,7 +27,11 @@ const UserSchema = new Schema(
     },
     phone: {
       type: String,
-      required: true,
+      required: false,
+    },
+    desc: {
+      type: String,
+      required: false,
     },
     isSeller: {
       type: Boolean,
@@ -43,4 +43,4 @@ const UserSchema = new Schema(
   }
 )
 
-export default mongoose.model('User', UserSchema)
+export default mongoose.model('User', userSchema)
