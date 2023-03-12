@@ -1,16 +1,17 @@
 import User from '../models/user.models.js'
-import bcrypt from 
+import bcrypt from 'bcrypt'
 export const register = async (req, res) => {
   try {
+    const hash = bcrypt.hashSync(req.body.password, 5)
     const newUser = new User({
-        username: ""
+      ...req.body,
+      password: hash,
     })
-
 
     await newUser.save()
     res.status(201).send('okay created')
   } catch (err) {
-    res.status(500).send('something went wrong')
+    res.status(500).send('something lol went wrong')
   }
 }
 
