@@ -1,45 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import newRequest from "../../utils/newRequest";
-import "./Navbar.scss";
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import newRequest from '../../utils/newRequest'
+import './Navbar.scss'
 
 function Navbar() {
-  const [active, setActive] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
   const isActive = () => {
-    window.scrollY > 0 ? setActive(true) : setActive(false);
-  };
+    window.scrollY > 0 ? setActive(true) : setActive(false)
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", isActive);
+    window.addEventListener('scroll', isActive)
     return () => {
-      window.removeEventListener("scroll", isActive);
-    };
-  }, []);
+      window.removeEventListener('scroll', isActive)
+    }
+  }, [])
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     try {
-      await newRequest.post("/auth/logout");
-      localStorage.setItem("currentUser", null);
-      navigate("/");
+      await newRequest.post('/auth/logout')
+      localStorage.setItem('currentUser', null)
+      navigate('/')
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
-    <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
+    <div className={active || pathname !== '/' ? 'navbar active' : 'navbar'}>
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">fiverr</span>
+            <span className="text">RATE IT</span>
           </Link>
           <span className="dot">.</span>
         </div>
@@ -50,7 +50,7 @@ function Navbar() {
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
+              <img src={currentUser.img || '/img/noavatar.jpg'} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
@@ -78,7 +78,9 @@ function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">Sign in</Link>
+              <Link to="/login" className="link">
+                Sign in
+              </Link>
               <Link className="link" to="/register">
                 <button>Join</button>
               </Link>
@@ -86,7 +88,7 @@ function Navbar() {
           )}
         </div>
       </div>
-      {(active || pathname !== "/") && (
+      {(active || pathname !== '/') && (
         <>
           <hr />
           <div className="menu">
@@ -122,7 +124,7 @@ function Navbar() {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
